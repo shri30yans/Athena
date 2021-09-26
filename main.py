@@ -47,7 +47,7 @@ def encryption_button_click():
     #"1.0" means that the input should be read from the first character and line zero
     #end-1c means End of text and then remove 1 character from the end ("\n")
     text = EncryptFrameObj.TextBox.get("1.0",'end-1c')
-    encMessage = Encoding.encrypt(text)
+    encMessage = encoding.encrypt(text)
     EncryptFrameObj.ChangeOutput(encMessage)
 
 
@@ -56,7 +56,7 @@ def decryption_button_click():
     #end-1c means End of text and then remove 1 character from the end ("\n")
     text = DecryptFrameObj.TextBox.get("1.0",'end-1c')
     bytestext = bytes(text, 'utf-8')
-    decMessage = Encoding.decrypt(bytestext)
+    decMessage = encoding.decrypt(bytestext)
     DecryptFrameObj.ChangeOutput(decMessage)
 
 
