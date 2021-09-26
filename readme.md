@@ -27,13 +27,13 @@ The message is converted to a bytes object and then decoded using the key.
 The message is then displayed in a text box.
 
 ### Images
-![encrypt_before](https://github.com/shri30yans/Encoder-Decoder/blob/main/images/encrypt_before.png)   
+![encrypt_before](https://github.com/shri30yans/Encoder-Decoder/blob/main/images/encrypt_before.jpg)   
 *Before encrypting* 
 
-![encrypt_after](https://github.com/shri30yans/Encoder-Decoder/blob/main/images/encrypt_after.png)   
+![encrypt_after](https://github.com/shri30yans/Encoder-Decoder/blob/main/images/encrypt_after.jpg)   
 *After encrypting* 
 
-![decrypt](https://github.com/shri30yans/Encoder-Decoder/blob/main/images/decrypt.png)  
+![decrypt](https://github.com/shri30yans/Encoder-Decoder/blob/main/images/decrypt.jpg)  
 *After decrypting* 
 
 
