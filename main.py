@@ -1,79 +1,47 @@
-import tkinter as tk
-import encoding
-
-root=tk.Tk()
-root.geometry("800x600")
-root.title("Encrypter")
-root.iconbitmap("images/icon.ico")
-# Setting icon o master window
-
-menu = tk.Menu(root)
-# Defining the menu of our Tkinter window
-root.config(menu = menu)
-
-class Frame:
-    # Creating a Frame with a Label and Text box for Encryption 
-    def __init__(self,colour,LabelText,ButtonText, ButtonCommand):
-        #root.configure(background=colour)
-        self.Frame = tk.Frame(root,width = 800,height = 600,bg = colour)
-        self.Label = tk.Label(self.Frame,text = LabelText,height = 3,bg = colour)
-        self.TextBox = tk.Text(self.Frame,width = 50,height = 5)
-        # creating a button using the widget
-        self.Button = tk.Button(self.Frame,text = ButtonText,command = ButtonCommand)
-        
-        self.OutputTextBox = tk.Text(self.Frame,width = 50, height = 5)
-        self.OutputTextBox.insert(tk.END,"Output will come here.")
-        self.OutputTextBox.config(state = 'disabled')
-    
-    def SetFrame(self):
-        self.hide_all_frames()
-        self.Frame.grid(row = 0,column = 0)
-        self.Label.grid(row = 0,column = 0)
-        self.TextBox.grid(row = 0,column = 1)
-        self.Button.grid(row = 1,column = 1)
-        self.OutputTextBox.grid(row = 2,column = 1)
-
-    def hide_all_frames(self):
-        DecryptFrameObj.Frame.grid_forget()
-        EncryptFrameObj.Frame.grid_forget()
-    
-    def ChangeOutput(self,text):
-        self.OutputTextBox.config(state = 'normal')
-        self.OutputTextBox.delete('1.0', tk.END)
-        self.OutputTextBox.insert(tk.END,text)
-        self.OutputTextBox.config(state = 'disabled')
-
-def encryption_button_click():
-    #"1.0" means that the input should be read from the first character and line zero
-    #end-1c means End of text and then remove 1 character from the end ("\n")
-    text = EncryptFrameObj.TextBox.get("1.0",'end-1c')
-    encMessage = encoding.encrypt(text)
-    EncryptFrameObj.ChangeOutput(encMessage)
+from modules.commands import commands
+import random
+from modules.audio import listen, speak
+import config
 
 
-def decryption_button_click():
-    #"1.0" means that the input should be read from the first character and line zero
-    #end-1c means End of text and then remove 1 character from the end ("\n")
-    text = DecryptFrameObj.TextBox.get("1.0",'end-1c')
-    bytestext = bytes(text, 'utf-8')
-    decMessage = encoding.decrypt(bytestext)
-    DecryptFrameObj.ChangeOutput(decMessage)
+def boot():
+    speak("Booting")
+
+def how_can_I_help():
+    speak("How can I help you, sir.")
+
+def find_command(query_list):
+    for cmd in commands:
+        for possible_query in query_list:
+            for command_triggers in cmd.triggers:
+                if all(x.lower() in possible_query.lower().split() for x in command_triggers):
+                    print(f"Match found! {cmd.name}")
+                    return cmd
 
 
+def run_forever():
+    while True:
+        query_list = listen()
+        if query_list is not None:
+            if any(prefix.replace(" ","").lower() in x.replace(" ","").lower() for x in query_list for prefix in config.possible_prefix_list):
+                command = find_command(query_list)
+                if command:
 
-EncryptFrameObj = Frame(colour = "green",LabelText="Text to encrypt:",ButtonText="Encrypt",ButtonCommand=encryption_button_click)
-DecryptFrameObj = Frame(colour = "red",LabelText="Text to decrypt:",ButtonText="Decrypt",ButtonCommand=decryption_button_click)
+                    if command.response:
+                        speak(random.choice(command.response))
+
+                    if command.function:
+                        if command.args is None:
+                            command.function()
+                        else:
+                            command.function(command.args)
+                        #command.function(query_list,command.args)
+                else:
+                    # A Command was not detected but the prefix was in the sentence
+                    speak("Sorry I didn't understand what you said.")   
+                print("------")
 
 
-# Create a menu item
-file_menu = tk.Menu(menu)
-# Creating a sub menu by associating it with our parent menu
-menu.add_cascade(label="Encoding",menu = file_menu)
-file_menu.add_command(label = "Encrypt",command = EncryptFrameObj.SetFrame)
-file_menu.add_command(label = "Decrypt",command = DecryptFrameObj.SetFrame)
-
-
-
-
-
-root.mainloop()
+boot()
+how_can_I_help()
+run_forever()
