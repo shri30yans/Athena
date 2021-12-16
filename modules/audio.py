@@ -47,7 +47,7 @@ def listen():
         Intended to calibrate the energy threshold with the ambient energy level. 
         Should be used on periods of audio without speech - will stop early if any speech is detected.
         '''
-        r.adjust_for_ambient_noise(source,duration = 2)
+        #r.adjust_for_ambient_noise(source,duration = 2)
 
         '''
         r.pause_threshold 

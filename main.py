@@ -2,6 +2,7 @@ from modules.commands import commands
 import random
 from modules.audio import listen, speak
 import config
+import keyboard  # using module keyboard
 
 
 def boot():
@@ -18,30 +19,34 @@ def find_command(query_list):
                     print(f"Match found! {cmd.name}")
                     return cmd
 
+def key_trigger():
+    while True:  # making a loop
+        if keyboard.is_pressed('q'):  # if key 'q' is pressed 
 
-def run_forever():
-    while True:
-        query_list = listen()
-        if query_list is not None:
-            if any(prefix.replace(" ","").lower() in x.replace(" ","").lower() for x in query_list for prefix in config.possible_prefix_list):
-                command = find_command(query_list)
-                if command:
+            command_sequence()
 
-                    if command.response:
-                        speak(random.choice(command.response))
+def command_sequence():
+    print("triggered")
+    query_list = listen()
+    if query_list is not None:
+        command = find_command(query_list)
+            
+        if command:
+            if command.response:
+                speak(random.choice(command.response))
 
-                    if command.function:
-                        if command.args is None:
-                            command.function()
-                        else:
-                            command.function(command.args)
-                        #command.function(query_list,command.args)
+            if command.function:
+                if command.args is None:
+                    command.function()
                 else:
-                    # A Command was not detected but the prefix was in the sentence
-                    speak("Sorry I didn't understand what you said.")   
-                print("------")
+                    command.function(command.args)
+                #command.function(query_list,command.args)
+        else:
+            # A Command was not detected but the prefix was in the sentence
+            speak("Sorry I didn't understand what you said.")   
+        print("------")
 
 
 boot()
 how_can_I_help()
-run_forever()
+key_trigger()
