@@ -1,5 +1,5 @@
 PyAudio
 pyttsx3
 speech_recognition
-#google calender
---upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+pytz
+--upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib # Google calender API
