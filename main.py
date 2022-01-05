@@ -6,7 +6,7 @@ import config
 import keyboard 
 
 def startup():
-    speak("Systems online. How can I help you, sir.")
+    speak("Systems online. How can I help you, dude.")
     print("Systems online.")
 
 
@@ -49,7 +49,7 @@ def command_sequence():
 def key_trigger():
     while True:
         # The trigger key is pressed.
-        if keyboard.is_pressed("ctrl+space"):
+        if keyboard.is_pressed(config.trigger_key):
             command_sequence()
 
 authenticate_google()

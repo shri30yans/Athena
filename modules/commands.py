@@ -13,8 +13,13 @@ class Command:
 commands = [
     Command(
         name="Get schedule",
-        triggers=[["what","do","i","have"], ["my", "schedule"], ["events","have"]],
+        triggers=[["what","do","i","have"], ["schedule"], ["events","have"]],
         function=get_schedule,
+    ),
+    Command(
+        name="Photo",
+        triggers=[["take","photo"],["camera"]],
+        function=camera,
     ),
     Command(
         name="Hi",
@@ -95,6 +100,20 @@ commands = [
         response=["Opening Github."],
         function=open_website,
         args="https://github.com/shri30yans",
+    ),
+    Command(
+        name="Open NCERT",
+        triggers=[["open", "ncert"]],
+        response=["Opening ncert website."],
+        function=open_website,
+        args="https://cbseacademic.nic.in/index.html",
+    ),
+    Command(
+        name="Open my website",
+        triggers=[["open", "my","website"]],
+        response=["Opening your website."],
+        function=open_website,
+        args="https://shri30yans.github.io/",
     ),
     Command(
         name="Exit", triggers=[["exit"], ["quit"]], response=["Bye."], function=exit

@@ -166,7 +166,8 @@ def get_date(query_list):
 
         return today + timedelta(difference)
 
-    
-    if day is not None:
+    if day is None:
+        return today
+    else:
         return date(month=month, day=day, year=year)
 

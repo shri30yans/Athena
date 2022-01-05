@@ -1,5 +1,5 @@
 # Athena
-<!-- 
+
 ## The challenge:
 In today's world, the modern student faces many distractions. It becomes tough to concentrate on our academics and focus on our work.
 These distractions shorten our attention span, pushes our boundaries to procrastinate and maneuver us to indulge in other activities that hold us back from fulfilling our academic potential.
@@ -16,7 +16,7 @@ Athena, a voice activated digital assistant named after the Greek goddess of kno
 It also maximises productivity by being able to perform multiple tasks at once through voice commands.
 Athena also connects to the students Google Calendar to keep track of a student’s predefined schedule.
 
-
+<!--
 ## Approach:
 Athena uses voice queries to answer questions, schedule events, answer basic questions, create to-do lists and perform actions by sending requests to a set of Internet services.
 It is also capable of setting alarms and reminders, music playback, entertainment and searching the internet.
