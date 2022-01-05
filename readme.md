@@ -38,7 +38,12 @@ Integrating other API's to fetch information
 -->
 
 
-
+### Set up Athena
+1. Install all depedencies: (Ubuntu)
+```
+sudo pip3 install -r requirements.txt
+```
+2. Setup requirements.py
 ### Setting up Google Calender
 For this step you would require a Google Cloud Platform Account.
 1. [Create a project and enable the Google Calender API.](https://developers.google.com/workspace/guides/create-project)
